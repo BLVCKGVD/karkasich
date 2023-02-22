@@ -1,0 +1,32 @@
+{% extends 'baseAdmin.html.twig' %}
+{% form_theme seoCreateForm 'bootstrap_5_layout.html.twig' %}
+{% block title %}Какрасыч | Администратор - SEO{% endblock %}
+
+{% block body %}
+
+
+    <div>
+        {{ form(seoCreateForm) }}
+    </div>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Путь</th>
+            <th>Заголовок</th>
+            <th>Описание</th>
+            <th>Роботы</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for s in seo %}
+            <tr>
+                <td>{{ s.path }}</td>
+                <td>{{ s.title }}</td>
+                <td>{{ s.title }}</td>
+                <td>{{ s.title }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
