@@ -1,0 +1,6 @@
+general:
+  path: Путь
+  title: Заголовок
+  description: Описание
+  robots: Роботы
+  save: Сохранить

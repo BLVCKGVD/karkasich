@@ -15,9 +15,41 @@
     {% endblock %}
 </head>
 <body>
-<div class="container-lg">
+<button class="btn" id="sidebarBtn" onclick="openSidebar();" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
+        aria-controls="offcanvasScrolling"><i class="bi bi-list fs-1"></i></button>
+
+<div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+     id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+    <div class="offcanvas-header bg-primary">
+        <h5 class="offcanvas-title text-white">Меню администратора</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <ul class="list-group ">
+            <li class="list-group-item list-group-item-action"
+                onclick="window.location = '{{ path('app_admin_seo') }}'">
+                SEO
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div id="body" class="container-fluid">
     {% block body %}
     {% endblock %}
 </div>
+<script>
+    let sidebarBool = false;
+    function openSidebar() {
+        sidebarBool = !sidebarBool;
+        if (sidebarBool) {
+           //$("#sidebarBtn").addClass("btn-success");
+        } else {
+
+        }
+        sidebarBool = !sidebarBool;
+    }
+</script>
+
 </body>
 </html>
