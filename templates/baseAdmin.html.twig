@@ -2,8 +2,10 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Welcome!{% endblock %}</title>
     <meta name="description" content="{{ description }}">
+
     <link rel="icon"
           href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
     {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
@@ -13,8 +15,24 @@
     {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <style>
+        .ui-resizable-helper { border: 2px dotted #00F; }
+    </style>
+    <script>
+        $(document).ready(function() {
+            $( "#resizable" ).resizable({
+                animate: true,
+                containment: "#offcanvasTop",
+                helper: "ui-resizable-helper"
+            });
+        } );
+    </script>
+
 </head>
 <body>
+
     <button class="btn" id="sidebarBtn" onclick="openSidebar();" type="button" data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasScrolling"
             aria-controls="offcanvasScrolling"><i class="bi bi-list fs-1"></i></button>
