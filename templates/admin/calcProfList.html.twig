@@ -1,0 +1,42 @@
+{% extends 'baseAdmin.html.twig' %}
+{% form_theme seoCreateForm 'bootstrap_5_layout.html.twig' %}
+{% block title %}Какрасыч | Администратор - Калькулятор профлиста{% endblock %}
+
+{% block body %}
+
+    <div class="row d-block d-lg-none">
+        <button class="btn btn-success mb-5 fs-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Создать</button>
+    </div>
+    <button class="d-none d-lg-flex btn btn-success float-end mb-5" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Создать</button>
+
+    <div class="offcanvas offcanvas-top " tabindex="-1" id="offcanvasTop" data-bs-backdrop="true" aria-labelledby="offcanvasTopLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasTopLabel">Создать запись</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+{#            {{ form(seoCreateForm) }}#}
+        </div>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Путь</th>
+            <th>Заголовок</th>
+            <th>Описание</th>
+            <th>Роботы</th>
+        </tr>
+        </thead>
+        <tbody>
+{#        {% for s in seo %}#}
+{#            <tr>#}
+{#                <td>{{ s.path }}</td>#}
+{#                <td>{{ s.title }}</td>#}
+{#                <td>{{ s.description }}</td>#}
+{#                <td>{{ s.robots }}</td>#}
+{#            </tr>#}
+{#        {% endfor %}#}
+        </tbody>
+    </table>
+
+{% endblock %}

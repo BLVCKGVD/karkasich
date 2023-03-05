@@ -12,8 +12,12 @@
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Kurale&display=swap" rel="stylesheet">
     </head>
     <body>
+    {% include 'particles/topNavBar.html.twig' %}
         {% block body %}
         {% endblock %}
     </body>

@@ -4,3 +4,5 @@ general:
   description: Описание
   robots: Роботы
   save: Сохранить
+  width: Ширина забора с воротами, калитками
+  height: Высота забора

@@ -58,4 +58,13 @@ class AdminController extends AbstractController
         $seoService->delete($seoRepository->find($id));
         return $this->redirectToRoute('app_admin_seo');
     }
+
+    #[Route('/admin/calc/profList/', name: 'app_admin_calc_profList')]
+    public function calcProfList(): Response
+    {
+        return $this->render('admin/index.html.twig', [
+            'controller_name' => 'Каркасыч (Админ - Калькулятор проф листа)',
+            'description' => 'Админка'
+        ]);
+    }
 }

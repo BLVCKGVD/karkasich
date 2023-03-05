@@ -19,7 +19,10 @@
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <style>
         .ui-resizable-helper { border: 2px dotted #00F; }
+        body { font-family: "Roboto", sans-serif!important;}
+        h1, h2, h3, h4, h5, h6 { font-family: 'Roboto', sans-serif!important; }
     </style>
+
     <script>
         $(document).ready(function() {
             $( "#resizable" ).resizable({
@@ -44,12 +47,27 @@
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                     aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body">
-            <ul class="list-group ">
-                <li class="list-group-item list-group-item-action"
-                    onclick="window.location = '{{ path('app_admin_seo') }}'">
-                    SEO
+        <div class="offcanvas-body px-0">
+            <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-start" id="menu">
+                <li class="nav-item">
+                    <a href="{{ path('app_admin_seo') }}" class="nav-link text-truncate">
+                        <i class="fs-5 bi-globe2"></i><span class="ms-1 d-none d-sm-inline">SEO</span>
+                    </a>
                 </li>
+                <li class="dropdown">
+                    <a href="#" class="nav-link dropdown-toggle  text-truncate" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fs-5 bi-calculator"></i><span class="ms-1 d-none d-sm-inline">Калькуляторы</span>
+                    </a>
+                    <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdown">
+                        <li><a class="dropdown-item text-start" href="/admin/calc/profList">ПРОФНАСТИЛ</a></li>
+                        <li><a class="dropdown-item text-start" href="#">ДЕРЕВО</a></li>
+                        <li><a class="dropdown-item text-start" href="#">МЕТАЛЛИЧЕСКИЙ ШТАКЕТНИК</a></li>
+                        <li><a class="dropdown-item text-start" href="#">СЕТКА РАБИЦА</a></li>
+                        <li><a class="dropdown-item text-start" href="#">ОТКАТНЫЕ ВОРОТА</a></li>
+
+                    </ul>
+                </li>
+
             </ul>
         </div>
     </div>

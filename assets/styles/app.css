@@ -1,11 +1,29 @@
+
 body {
-    background-color: lightgray;
+    background-color: #F5F5F5!important;
+    font-family: 'Kurale', serif!important;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Kurale', serif!important;
+}
+
+.navbar {
+    background-color: #F4FCE7 !important;
+}
+.navbar-nav .nav-link.active {
+    border-bottom: #284907 2px solid !important;
+}
+
+.nav-link {
+    padding-bottom: 0.25em!important;
+    padding-top: 0.25em!important;
 }
 
 /* ---------------------------------------------------
     OFFCANVAS ESSENTIALS
 ----------------------------------------------------- */
 .offcanvas-end {
+
 }
 #offcanvasTop {
     height: 80vh!important;
