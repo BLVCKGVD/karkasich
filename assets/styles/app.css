@@ -1,10 +1,21 @@
-
+html {
+    overflow-x: hidden;
+}
 body {
     background-color: #F5F5F5!important;
     font-family: 'Kurale', serif!important;
+    overflow-x: clip!important;
 }
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Kurale', serif!important;
+}
+
+.bg-secondary {
+    background-color: #F4FCE7 !important;
+}
+
+.text-success {
+    color: #284907!important;
 }
 
 .navbar {
@@ -13,10 +24,17 @@ h1, h2, h3, h4, h5, h6 {
 .navbar-nav .nav-link.active {
     border-bottom: #284907 2px solid !important;
 }
+.navbar-nav .nav-link {
+    color: #000000!important;
+}
 
 .nav-link {
     padding-bottom: 0.25em!important;
     padding-top: 0.25em!important;
+}
+
+.content-wrapper-green {
+    background-color: #F4FCE7!important;
 }
 
 /* ---------------------------------------------------
