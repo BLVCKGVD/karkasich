@@ -15,11 +15,13 @@
             {{ form_row(mainPageForm.images) }}
 
                 <div class="row">
+                    {% if mainPage.images is not null and mainPage.images is not empty %}
                     {% for i in mainPage.images %}
                         <div class="col-2 ms-3 p-0" style="height: 150px; background: url({{ asset('uploads/'~i) }}) no-repeat; background-size: contain;">
                             <div onclick="window.location = '{{ path('app_admin_pages_main_page_delete_image', {name:i}) }}'" class="btn btn-danger p-1 rounded-0 float-end fs-6" style="line-height: 9px">x</div>
                         </div>
                     {% endfor %}
+                    {% endif %}
                 </div>
 
             {{ form_row(mainPageForm.save) }}

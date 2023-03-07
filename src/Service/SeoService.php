@@ -30,7 +30,7 @@ class SeoService
         $this->entityManager->flush();
     }
 
-    public function findByPath(string $path): Seo
+    public function findByPath(string $path): ?Seo
     {
         return $this->entityManager->getRepository(Seo::class)->findOneBy([
             'path' => $path

@@ -15,7 +15,7 @@ class AppFixtures extends Fixture
         $mainPage->setAdvantage1("Плюс 1");
         $mainPage->setAdvantage2("Плюс 2");
         $mainPage->setAdvantage3("Плюс 3");
-        $mainPage->setImages(['images/zabor2.png']);
+        $mainPage->setImages(['caroulsel_void.jpg']);
         $manager->persist($mainPage);
         $manager->flush();
     }

@@ -132,6 +132,10 @@ class AdminController extends AbstractController
         if (($key = array_search($name, $images)) !== false) {
             unset($images[$key]);
         }
+        if ($name != 'caroulsel_void.jpg') {
+            $destination = $this->getParameter('kernel.project_dir') . '/public/uploads/';
+            unlink($destination.$name);
+        }
         $mainPage->setImages($images);
         $entityManager->persist($mainPage);
         $entityManager->flush();
