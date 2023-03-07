@@ -2,9 +2,13 @@
 
 namespace App\Controller;
 
+use App\Form\MainPageType;
+use App\Form\SeoEditType;
 use App\Form\SeoType;
+use App\Repository\MainPageRepository;
 use App\Repository\SeoRepository;
 use App\Service\SeoService;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,14 +35,29 @@ class AdminController extends AbstractController
     }
 
     #[Route('/admin/seo', name: 'app_admin_seo')]
-    public function seo(Request       $request,
-                        SeoService    $seoService,
-                        SeoRepository $seoRepository): Response
+    public function seo(Request                $request,
+                        SeoService             $seoService,
+                        SeoRepository          $seoRepository,
+                        EntityManagerInterface $entityManager): Response
     {
         $seoCreateForm = $this->createForm(SeoType::class);
         $seoCreateForm->handleRequest($request);
         if ($seoCreateForm->isSubmitted() && $seoCreateForm->isValid()) {
             $seoService->create($seoCreateForm->getData());
+        }
+
+        $seoEditForm = $this->createForm(SeoEditType::class);
+        $seoEditForm->handleRequest($request);
+        if ($seoEditForm->isSubmitted() && $seoEditForm->isValid()) {
+            $seo = $seoRepository->find($seoEditForm->get('id')->getData());
+            if ($seo) {
+                $seo
+                    ->setTitle($seoEditForm->get('title')->getData())
+                    ->setDescription($seoEditForm->get('description')->getData())
+                    ->setPath($seoEditForm->get('path')->getData())
+                    ->setRobots($seoEditForm->get('robots')->getData());
+            }
+            $seoService->create($seo);
         }
         $seo = $seoRepository->findAll();
         return $this->render('admin/seo.html.twig', [
@@ -46,6 +65,7 @@ class AdminController extends AbstractController
             'description' => 'Админка',
             'seo' => $seo,
             'seoCreateForm' => $seoCreateForm->createView(),
+            'seoEditForm' => $seoEditForm->createView(),
 
         ]);
     }
@@ -66,5 +86,56 @@ class AdminController extends AbstractController
             'controller_name' => 'Каркасыч (Админ - Калькулятор проф листа)',
             'description' => 'Админка'
         ]);
+    }
+
+    #[Route('/admin/pages/mainPage', name: 'app_admin_pages_main_page')]
+    public function mainPage(Request                $request,
+                             MainPageRepository     $mainPageRepository,
+                             EntityManagerInterface $entityManager): Response
+    {
+        $mainPage = $mainPageRepository->findAll()[0];
+        $mainPageForm = $this->createForm(MainPageType::class, $mainPage);
+        $mainPageForm->handleRequest($request);
+        if ($mainPageForm->isSubmitted() && $mainPageForm->isValid()) {
+            $mainPage = $mainPageForm->getData();
+            $images = $mainPageForm->get('images')->getData();
+            foreach ($images as $image) {
+                $uploadedFile = $image;
+                $destination = $this->getParameter('kernel.project_dir') . '/public/uploads';
+                $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $newFilename = $originalFilename . '-' . uniqid() . '.' . $uploadedFile->guessExtension();
+                $uploadedFile->move(
+                    $destination,
+                    $newFilename
+                );
+                $mainPage->addImage($newFilename);
+            }
+            $entityManager->persist($mainPage);
+            $entityManager->flush();
+        }
+        return $this->render('admin/pages/mainPage.html.twig', [
+            'controller_name' => 'Каркасыч (Админ - Страницы - Главная)',
+            'description' => 'Админка',
+            'mainPage' => $mainPage,
+            'mainPageForm' => $mainPageForm->createView(),
+        ]);
+    }
+
+    #[Route('/admin/pages/mainPage/delete/image/{name}', name: 'app_admin_pages_main_page_delete_image')]
+    public function deleteImage(
+        $name,
+        MainPageRepository $mainPageRepository,
+        EntityManagerInterface $entityManager): Response
+    {
+        $mainPage = $mainPageRepository->findAll()[0];
+        $images = $mainPage->getImages();
+        if (($key = array_search($name, $images)) !== false) {
+            unset($images[$key]);
+        }
+        $mainPage->setImages($images);
+        $entityManager->persist($mainPage);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_admin_pages_main_page');
     }
 }

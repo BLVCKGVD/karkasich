@@ -1,0 +1,55 @@
+{% extends 'baseAdmin.html.twig' %}
+{% form_theme mainPageForm 'bootstrap_5_layout.html.twig' %}
+{% block title %}Какрасыч | Администратор - SEO{% endblock %}
+
+{% block body %}
+    {{ form_start(mainPageForm) }}
+    <div class="row">
+
+        <div class="col-6">
+            {{ form_row(mainPageForm.mainText) }}
+            <p>
+
+                Символов осталось: <span class="text-info GFG">{{255 - mainPage.mainText|length }}</span>
+            </p>
+            {{ form_row(mainPageForm.images) }}
+
+                <div class="row">
+                    {% for i in mainPage.images %}
+                        <div class="col-2 ms-3 p-0" style="height: 150px; background: url({{ asset('uploads/'~i) }}) no-repeat; background-size: contain;">
+                            <div onclick="window.location = '{{ path('app_admin_pages_main_page_delete_image', {name:i}) }}'" class="btn btn-danger p-1 rounded-0 float-end fs-6" style="line-height: 9px">x</div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+            {{ form_row(mainPageForm.save) }}
+        </div>
+        <div class="col-6">
+            {{ form_row(mainPageForm.advantage1) }}
+            {{ form_row(mainPageForm.advantage2) }}
+            {{ form_row(mainPageForm.advantage3) }}
+        </div>
+
+    </div>
+    {{ form_end(mainPageForm) }}
+
+    <script>
+        $(document).ready(function () {
+            var max_length = 255;
+            $('textarea').keyup(function () {
+                var len = max_length - $(this).val().length;
+                $('.GFG').text(len);
+                if (len < 0) {
+                    $('#main_page_save').addClass('disabled')
+                    $('.GFG').removeClass('text-info')
+                    $('.GFG').addClass('text-danger')
+                } else {
+                    $('#main_page_save').removeClass('disabled')
+                    $('.GFG').removeClass('text-danger')
+                    $('.GFG').addClass('text-info')
+                }
+            });
+
+        });
+    </script>
+{% endblock %}

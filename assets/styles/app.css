@@ -47,3 +47,13 @@ h1, h2, h3, h4, h5, h6 {
     height: 80vh!important;
 }
 
+#offcanvasBottom {
+    height: 80vh!important;
+}
+
+.bg-green {
+    background-color: #284907!important;
+}
+.text-green {
+    color: #284907!important;
+}

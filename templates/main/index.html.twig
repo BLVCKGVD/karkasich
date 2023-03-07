@@ -24,11 +24,11 @@
                  style="background: url('{{ asset('svg/fence.svg') }}') repeat-x ; background-size: cover;">
                 <div class="col-sm-12 col-md-12" style="height: 100%">
                     <p class="p-4 text-success fs-3">
-                        Каркасыч всегда тебя будет выручать! Качество, гарантии, надежность, вареные яица и многое другое!
+                        {{ page.mainText|default('Каркасыч всегда тебя будет выручать! Качество, гарантии, надежность, вареные яица и многое другое!') }}
                     </p>
                     <div class="row">
                         <div class="col-12 text-center">
-                            <div class="btn btn-warning text-white fw-bold justify-content-center">Заказать шлюху</div>
+                            <div class="btn btn-warning text-white fw-bold justify-content-center">Заказать замер</div>
                         </div>
 
                     </div>
@@ -40,7 +40,188 @@
     </div>
 
 
-    <div class="row mt-5 rounded-5 content-wrapper-green">
-        <p class="p-4 text-success fs-3">Каркасыч всегда тебя будет выручат!</p>
+    <div class="row mt-5 rounded-5 content-wrapper-green ">
+        <p class="p-4 text-success fs-3 text-center">Каталог товаров</p>
+        <div class="row align-content-center ps-5 pe-4">
+
+            <div class="col-sm-auto col-md-6 col-lg-4  mb-3 ">
+                <div class="card" style="">
+                    <img class="card-img-top" src="{{ asset('images/zabor2.png') }}" alt="Card image cap">
+                    <div class="card-body text-center">
+                        <h5 style="margin-top: -40px" class="card-title bg-white">Наименование забора</h5>
+                        <center>
+                            <hr class="align-self-center m-0 w-50 border-2" style="border-color: #000000!important;">
+                        </center>
+                        <p class="card-text text-secondary">от 1000 р. / m2</p>
+                        <a href="#" class="btn btn-warning col-9 rounded-0 text-white">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-auto col-md-6 col-lg-4 mb-3 ">
+                <div class="card" style="">
+                    <img class="card-img-top" src="{{ asset('images/zabor2.png') }}" alt="Card image cap">
+                    <div class="card-body text-center">
+                        <h5 style="margin-top: -40px" class="card-title bg-white">Наименование забора</h5>
+                        <center>
+                            <hr class="align-self-center m-0 w-50 border-2" style="border-color: #000000!important;">
+                        </center>
+                        <p class="card-text text-secondary">от 1000 р. / m2</p>
+                        <a href="#" class="btn btn-warning col-9 rounded-0 text-white">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-auto col-md-6 col-lg-4 mb-3 ">
+                <div class="card" style="">
+                    <img class="card-img-top" src="{{ asset('images/zabor2.png') }}" alt="Card image cap">
+                    <div class="card-body text-center">
+                        <h5 style="margin-top: -40px" class="card-title bg-white">Наименование забора</h5>
+                        <center>
+                            <hr class="align-self-center m-0 w-50 border-2" style="border-color: #000000!important;">
+                        </center>
+                        <p class="card-text text-secondary">от 1000 р. / m2</p>
+                        <a href="#" class="btn btn-warning col-9 rounded-0 text-white">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-auto col-md-6 col-lg-4  mb-3 ">
+                <div class="card" style="">
+                    <img class="card-img-top" src="{{ asset('images/zabor2.png') }}" alt="Card image cap">
+                    <div class="card-body text-center">
+                        <h5 style="margin-top: -40px" class="card-title bg-white">Наименование забора</h5>
+                        <center>
+                            <hr class="align-self-center m-0 w-50 border-2" style="border-color: #000000!important;">
+                        </center>
+                        <p class="card-text text-secondary">от 1000 р. / m2</p>
+                        <a href="#" class="btn btn-warning col-9 rounded-0 text-white">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-auto col-md-6 col-lg-4 mb-3">
+                <div class="card" style="">
+                    <img class="card-img-top" src="{{ asset('images/zabor2.png') }}" alt="Card image cap">
+                    <div class="card-body text-center">
+                        <h5 style="margin-top: -40px" class="card-title bg-white">Наименование забора</h5>
+                        <center>
+                            <hr class="align-self-center m-0 w-50 border-2" style="border-color: #000000!important;">
+                        </center>
+                        <p class="card-text text-secondary">от 1000 р. / m2</p>
+                        <a href="#" class="btn btn-warning col-9 rounded-0 text-white">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-auto col-md-6 col-lg-4 mb-3">
+                <div class="card" style="">
+                    <img class="card-img-top" src="{{ asset('images/zabor2.png') }}" alt="Card image cap">
+                    <div class="card-body text-center">
+                        <h5 style="margin-top: -40px" class="card-title bg-white">Наименование забора</h5>
+                        <center>
+                            <hr class="align-self-center m-0 w-50 border-2" style="border-color: #000000!important;">
+                        </center>
+                        <p class="card-text text-secondary">от 1000 р. / m2</p>
+                        <a href="#" class="btn btn-warning col-9 rounded-0 text-white">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="row text-center">
+            <h3 class="mb-5">Почему нас выбирают</h3>
+            <div class="col-sm-auto col-md-6 col-lg-4 mb-3">
+                <div class="row">
+                    <div class="col-2">
+
+                        <div class="col-8 col-md-12 col-lg-10 rounded-circle bg-secondary">
+                            <h2 class="text-success">1</h2>
+                        </div>
+                    </div>
+                    <div class="col-8 text-start pt-3">
+                        {{ page.advantage1 }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-auto col-md-6 col-lg-4 mb-3">
+                <div class="row">
+                    <div class="col-2">
+
+                        <div class="col-8 col-md-12 rounded-circle bg-secondary">
+                            <h2 class="text-success">2</h2>
+                        </div>
+                    </div>
+                    <div class="col-8 text-start pt-3">
+                        {{ page.advantage2 }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-auto col-md-6 col-lg-4 mb-3">
+                <div class="row">
+                    <div class="col-2">
+
+                        <div class="col-8 col-md-12 rounded-circle bg-secondary">
+                            <h2 class="text-success">3</h2>
+                        </div>
+                    </div>
+                    <div class="col-8 text-start pt-3">
+                        {{ page.advantage3 }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5 pb-3 rounded-5 content-wrapper-green ">
+        <p class="p-4 text-success fs-3 text-center con">Наши работы</p>
+        <center>
+            <div id="carouselExampleControls" class="carousel slide col-sm-12 col-md-8" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    {% for i in page.images %}
+                        {% if i == page.images|first %}
+                            <div class="carousel-item active">
+                                <img class="d-block w-100 img-fluid" src="{{ asset('uploads/'~i) }}" alt="First slide">
+                            </div>
+                        {% else %}
+                            <div class="carousel-item">
+                                <img class="d-block w-100 img-fluid" src="{{ asset('uploads/'~i) }}" alt="Second slide">
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                        data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                        data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </center>
+    </div>
+    <div class="row mt-5">
+        <div class="row text-center mb-5">
+            <h3 class="mb-5">География наших работ</h3>
+            <div class="row">
+
+                <div class="col-md-12 col-lg-3">
+                    <i class=" bi bi-geo-alt fs-4 text-green"></i>
+                    <span class="ms-1 fs-6 text-black ">Санкт-Петербург</span>
+                </div>
+                    <div class="col-md-12 col-lg-3">
+                    <i class="bi bi-geo-alt fs-4 text-green"></i>
+                    <span class="ms-1 fs-6 text-black ">Ленинградская область</span>
+                    </div>
+                    <div class="col-md-12 col-lg-3">
+                    <i class=" bi bi-geo-alt fs-4 text-green"></i>
+                    <span class="ms-1 fs-6 text-black ">Псков и область</span>
+                    </div>
+                    <div class="col-md-12 col-lg-3">
+                    <i class=" bi bi-geo-alt fs-4 text-green"></i>
+                    <span class="ms-1 fs-6 text-black align-self-center">Карелия</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 {% endblock %}

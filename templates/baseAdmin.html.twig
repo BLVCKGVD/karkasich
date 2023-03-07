@@ -30,12 +30,6 @@
                 containment: "#offcanvasTop",
                 helper: "ui-resizable-helper"
             });
-            $('#table').draggable();
-            $('#table').resizable({
-                animate: true,
-                containment: "#offcanvasTop",
-                helper: "ui-resizable-helper"
-            });
         } );
     </script>
 
@@ -45,7 +39,7 @@
             data-bs-target="#offcanvasScrolling"
             aria-controls="offcanvasScrolling"><i class="bi bi-list fs-1"></i></button>
 
-    <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1"
+    <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1"
          id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
         <div class="offcanvas-header bg-primary">
             <h5 class="offcanvas-title text-white">Меню администратора</h5>
@@ -69,6 +63,17 @@
                         <li><a class="dropdown-item text-start" href="#">МЕТАЛЛИЧЕСКИЙ ШТАКЕТНИК</a></li>
                         <li><a class="dropdown-item text-start" href="#">СЕТКА РАБИЦА</a></li>
                         <li><a class="dropdown-item text-start" href="#">ОТКАТНЫЕ ВОРОТА</a></li>
+
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="nav-link dropdown-toggle  text-truncate" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fs-5 bi-calculator"></i><span class="ms-1 d-none d-sm-inline">Страницы</span>
+                    </a>
+                    <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdown">
+                        <li><a class="dropdown-item text-start" href="{{ path('app_admin_pages_main_page') }}">Главная</a></li>
+
 
                     </ul>
                 </li>

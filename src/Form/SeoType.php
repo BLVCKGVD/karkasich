@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Seo;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -47,6 +48,12 @@ class SeoType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Seo::class,
+            'constraints' => [
+                new UniqueEntity([
+                    'entityClass' => Seo::class,
+                    'fields' => 'path',
+                ]),
+            ],
         ]);
     }
 }
