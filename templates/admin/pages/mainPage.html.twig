@@ -6,7 +6,7 @@
     {{ form_start(mainPageForm) }}
     <div class="row">
 
-        <div class="col-6">
+        <div class="col-sm-12 col-md-6">
             {{ form_row(mainPageForm.mainText) }}
             <p>
 
@@ -24,13 +24,15 @@
                     {% endif %}
                 </div>
 
-            {{ form_row(mainPageForm.save) }}
+
         </div>
-        <div class="col-6">
+        <div class="col-sm-12 col-md-6">
             {{ form_row(mainPageForm.advantage1) }}
             {{ form_row(mainPageForm.advantage2) }}
             {{ form_row(mainPageForm.advantage3) }}
         </div>
+        {{ form_row(mainPageForm.save) }}
+
 
     </div>
     {{ form_end(mainPageForm) }}

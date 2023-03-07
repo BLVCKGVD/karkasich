@@ -27,6 +27,7 @@ class MainPageController extends AbstractController
                 $order->setCreatedAt(new \DateTimeImmutable('now',new \DateTimeZone('Europe/Moscow')));
                 $entityManager->persist($order);
                 $entityManager->flush();
+                return $this->redirect($request->getUri());
             }
         }
 

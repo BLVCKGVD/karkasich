@@ -31,16 +31,24 @@ class MainPageType extends AbstractType
                 [
                     'attr' => [
                         'rows' => 5
-                    ]
+                    ],
+                    'label' => $this->translator->trans('general.mainText'),
                 ])
-            ->add('advantage1')
-            ->add('advantage2')
-            ->add('advantage3')
+            ->add('advantage1',TextareaType::class,[
+                'label' => $this->translator->trans('general.advantage1'),
+            ])
+            ->add('advantage2',TextareaType::class,[
+                'label' => $this->translator->trans('general.advantage2'),
+            ])
+            ->add('advantage3',TextareaType::class,[
+                'label' => $this->translator->trans('general.advantage3'),
+            ])
             ->add('images', FileType::class,
                 [
                     'multiple' => 'multiple',
                     'required' => false,
                     'mapped' => false,
+                    'label' => $this->translator->trans('general.images'),
                 ])
             ->add('save', SubmitType::class, [
                 'label' => $this->translator->trans('general.save')

@@ -14,17 +14,21 @@ use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class OrderType extends AbstractType
 {
     private DateService $dateService;
+    private TranslatorInterface $translator;
 
     /**
      * @param DateService $dateService
+     * @param TranslatorInterface $translator
      */
-    public function __construct(DateService $dateService)
+    public function __construct(DateService $dateService, TranslatorInterface $translator)
     {
         $this->dateService = $dateService;
+        $this->translator = $translator;
     }
 
 
@@ -34,18 +38,27 @@ class OrderType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('phone', TelType::class)
-            ->add('email', EmailType::class)
-            ->add('text', TextareaType::class)
+            ->add('phone', TelType::class, [
+                'label' => $this->translator->trans('general.phone')
+            ])
+            ->add('email', EmailType::class, [
+                'required' => false,
+                'label' => $this->translator->trans('general.email')
+            ])
+            ->add('text', TextareaType::class, [
+                'required' => false,
+                'label' => $this->translator->trans('general.text')
+            ])
             ->add('actionText', HiddenType::class)
             ->add('status', HiddenType::class, [
                 'empty_data' => 'new'
             ])
-            ->add('createdAt', HiddenType::class,[
-                'required'=>false
+            ->add('createdAt', HiddenType::class, [
+                'required' => false
             ])
-            ->add('save', SubmitType::class)
-        ;
+            ->add('save', SubmitType::class, [
+                'attr' => ['class' => 'btn btn-warning text-white'],
+                'label' => $this->translator->trans('general.feedback')]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

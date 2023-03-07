@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
+                <h5 class="modal-title">Оставить заявку</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             {{ form_start(orderForm) }}
@@ -12,6 +12,7 @@
                 {{ form_row(orderForm.text) }}
             </div>
             <div class="modal-footer">
+
                 {{ form_row(orderForm.save) }}
             </div>
             {{ form_end(orderForm) }}
