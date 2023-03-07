@@ -28,7 +28,11 @@
                     </p>
                     <div class="row">
                         <div class="col-12 text-center">
-                            <div class="btn btn-warning text-white fw-bold justify-content-center">Заказать замер</div>
+                            <button
+                                    class="btn btn-warning text-white fw-bold justify-content-center"
+                                    onclick="launchModal('С главной страницы первый блок')">
+                                Заказать замер
+                            </button>
                         </div>
 
                     </div>
@@ -207,21 +211,22 @@
                     <i class=" bi bi-geo-alt fs-4 text-green"></i>
                     <span class="ms-1 fs-6 text-black ">Санкт-Петербург</span>
                 </div>
-                    <div class="col-md-12 col-lg-3">
+                <div class="col-md-12 col-lg-3">
                     <i class="bi bi-geo-alt fs-4 text-green"></i>
                     <span class="ms-1 fs-6 text-black ">Ленинградская область</span>
-                    </div>
-                    <div class="col-md-12 col-lg-3">
+                </div>
+                <div class="col-md-12 col-lg-3">
                     <i class=" bi bi-geo-alt fs-4 text-green"></i>
                     <span class="ms-1 fs-6 text-black ">Псков и область</span>
-                    </div>
-                    <div class="col-md-12 col-lg-3">
+                </div>
+                <div class="col-md-12 col-lg-3">
                     <i class=" bi bi-geo-alt fs-4 text-green"></i>
                     <span class="ms-1 fs-6 text-black align-self-center">Карелия</span>
-                    </div>
                 </div>
-
             </div>
+
         </div>
     </div>
+    </div>
+    {% include './particles/modal.html.twig' %}
 {% endblock %}

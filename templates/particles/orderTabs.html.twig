@@ -1,0 +1,75 @@
+<script>
+    $(document).ready(function () {
+        $("#myTab a").click(function (e) {
+            e.preventDefault();
+            $(this).tab("show");
+        });
+    });
+</script>
+<div class="m-4">
+    <ul class="nav nav-pills" id="myTab">
+        <li class="nav-item">
+            <a href="#new" class="nav-link active">Новые</a>
+        </li>
+        <li class="nav-item">
+            <a href="#read" class="nav-link">Прочитанные</a>
+        </li>
+
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane fade show active" id="new">
+            <h4 class="mt-2">Новые заявки</h4>
+            <div class="row">
+                {% for new in newOrders %}
+                    <div class="col-auto">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                {{ new.phone }}
+                            </li>
+                            <li class="list-group-item">
+                                {{ new.email }}
+                            </li>
+                            <li class="list-group-item">
+                                {{ new.text }}
+                            </li>
+                            <li class="list-group-item">
+                                {{ new.actionText }}
+                            </li>
+                            <li class="list-group-item text-center">
+                                <a class="col-11 btn btn-success"
+                                   href="{{ path('app_admin_orders_read', { id: new.id }) }}">
+                                    Прочитано
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="tab-pane fade" id="read">
+            <h4 class="mt-2">Прочитанные заявки</h4>
+            <div class="row">
+                {% for read in readOrders %}
+                    <div class="col-auto">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                {{ read.phone }}
+                            </li>
+                            <li class="list-group-item">
+                                {{ read.email }}
+                            </li>
+                            <li class="list-group-item">
+                                {{ read.text }}
+                            </li>
+                            <li class="list-group-item">
+                                {{ read.actionText }}
+                            </li>
+                        </ul>
+                    </div>
+                {% endfor %}
+            </div>
+
+
+        </div>
+    </div>
+</div>

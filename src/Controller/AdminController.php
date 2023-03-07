@@ -6,6 +6,7 @@ use App\Form\MainPageType;
 use App\Form\SeoEditType;
 use App\Form\SeoType;
 use App\Repository\MainPageRepository;
+use App\Repository\OrderRepository;
 use App\Repository\SeoRepository;
 use App\Service\SeoService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -142,4 +143,32 @@ class AdminController extends AbstractController
 
         return $this->redirectToRoute('app_admin_pages_main_page');
     }
+
+    #[Route('/admin/orders/', name: 'app_admin_orders')]
+    public function getOrders(OrderRepository $orderRepository): Response
+    {
+        $newOrders = $orderRepository->findBy([
+            "status" => "new"
+        ]);
+        $readOrders = $orderRepository->findBy([
+            "status" => "read"
+        ]);
+        return $this->render('admin/orders.html.twig', [
+            'controller_name' => 'Каркасыч (Админ - Заказы)',
+            'description' => 'Админка',
+            'newOrders' => $newOrders,
+            'readOrders' => $readOrders
+        ]);
+    }
+
+    #[Route('/admin/orders/read/{id}', name: 'app_admin_orders_read')]
+    public function readOrder(OrderRepository $orderRepository, $id, EntityManagerInterface $entityManager): Response
+    {
+        $order = $orderRepository->find($id);
+        $order->setStatus("read");
+        $entityManager->persist($order);
+        $entityManager->flush();
+        return $this->redirectToRoute("app_admin_orders");
+    }
+
 }
