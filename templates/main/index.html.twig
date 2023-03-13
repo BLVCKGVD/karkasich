@@ -20,16 +20,16 @@
                 <img class="img-fluid" src="{{ asset('svg/logo.svg') }}">
             </div>
             <div class="d-none d-sm-block d-md-none w-100"></div>
-            <div class="col-12 col-md-6 mt-5 p-3"
-                 style="background: url('{{ asset('svg/fence.svg') }}') repeat-x ; background-size: cover;">
+            <div class="col-sm-12 col-md-12 col-lg-6 mt-5 p-3 fence-bg"
+                 style="background: url('{{ asset('svg/fence.svg') }}') repeat-x ; background-size: contain;">
                 <div class="col-sm-12 col-md-12" style="height: 100%">
-                    <p class="p-4 text-success fs-3">
+                    <p class="p-4 text-green fs-3">
                         {{ page.mainText|default('Каркасыч всегда тебя будет выручать! Качество, гарантии, надежность, вареные яица и многое другое!') }}
                     </p>
                     <div class="row">
                         <div class="col-12 text-center">
                             <button
-                                    class="btn btn-warning text-white fw-bold justify-content-center"
+                                    class="btn btn-warning col-5 fs-4 text-white fw-bold justify-content-center"
                                     onclick="launchModal('С главной страницы первый блок')">
                                 Заказать замер
                             </button>
@@ -45,87 +45,25 @@
 
 
     <div class="row mt-5 rounded-5 content-wrapper-green ">
-        <p class="p-4 text-success fs-3 text-center">Каталог товаров</p>
+        <p class="p-4 text-green fs-3 text-center">Каталог товаров</p>
         <div class="row align-content-center ps-5 pe-4">
-
+            {% for p in products %}
+                {% if p.inMain == 1 and p.isEnabled == 1 %}
             <div class="col-sm-auto col-md-6 col-lg-4  mb-3 ">
                 <div class="card" style="">
-                    <img class="card-img-top" src="{{ asset('images/zabor2.png') }}" alt="Card image cap">
+                    <img class="card-img-top" src="{{ asset('uploads/'~p.images|first) }}" alt="Card image cap">
                     <div class="card-body text-center">
-                        <h5 style="margin-top: -40px" class="card-title bg-white">Наименование забора</h5>
+                        <h5 style="margin-top: -40px" class="card-title bg-white">{{ p.name }}</h5>
                         <center>
                             <hr class="align-self-center m-0 w-50 border-2" style="border-color: #000000!important;">
                         </center>
-                        <p class="card-text text-secondary">от 1000 р. / m2</p>
-                        <a href="#" class="btn btn-warning col-9 rounded-0 text-white">Подробнее</a>
+                        <p class="card-text text-secondary">от {{ p.cost }} р./п.м.</p>
+                        <a href="{{ path('app_product',{ id: p.id}) }}" class="btn btn-warning col-9 rounded-0 text-white">Подробнее</a>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-auto col-md-6 col-lg-4 mb-3 ">
-                <div class="card" style="">
-                    <img class="card-img-top" src="{{ asset('images/zabor2.png') }}" alt="Card image cap">
-                    <div class="card-body text-center">
-                        <h5 style="margin-top: -40px" class="card-title bg-white">Наименование забора</h5>
-                        <center>
-                            <hr class="align-self-center m-0 w-50 border-2" style="border-color: #000000!important;">
-                        </center>
-                        <p class="card-text text-secondary">от 1000 р. / m2</p>
-                        <a href="#" class="btn btn-warning col-9 rounded-0 text-white">Подробнее</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-auto col-md-6 col-lg-4 mb-3 ">
-                <div class="card" style="">
-                    <img class="card-img-top" src="{{ asset('images/zabor2.png') }}" alt="Card image cap">
-                    <div class="card-body text-center">
-                        <h5 style="margin-top: -40px" class="card-title bg-white">Наименование забора</h5>
-                        <center>
-                            <hr class="align-self-center m-0 w-50 border-2" style="border-color: #000000!important;">
-                        </center>
-                        <p class="card-text text-secondary">от 1000 р. / m2</p>
-                        <a href="#" class="btn btn-warning col-9 rounded-0 text-white">Подробнее</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-auto col-md-6 col-lg-4  mb-3 ">
-                <div class="card" style="">
-                    <img class="card-img-top" src="{{ asset('images/zabor2.png') }}" alt="Card image cap">
-                    <div class="card-body text-center">
-                        <h5 style="margin-top: -40px" class="card-title bg-white">Наименование забора</h5>
-                        <center>
-                            <hr class="align-self-center m-0 w-50 border-2" style="border-color: #000000!important;">
-                        </center>
-                        <p class="card-text text-secondary">от 1000 р. / m2</p>
-                        <a href="#" class="btn btn-warning col-9 rounded-0 text-white">Подробнее</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-auto col-md-6 col-lg-4 mb-3">
-                <div class="card" style="">
-                    <img class="card-img-top" src="{{ asset('images/zabor2.png') }}" alt="Card image cap">
-                    <div class="card-body text-center">
-                        <h5 style="margin-top: -40px" class="card-title bg-white">Наименование забора</h5>
-                        <center>
-                            <hr class="align-self-center m-0 w-50 border-2" style="border-color: #000000!important;">
-                        </center>
-                        <p class="card-text text-secondary">от 1000 р. / m2</p>
-                        <a href="#" class="btn btn-warning col-9 rounded-0 text-white">Подробнее</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-auto col-md-6 col-lg-4 mb-3">
-                <div class="card" style="">
-                    <img class="card-img-top" src="{{ asset('images/zabor2.png') }}" alt="Card image cap">
-                    <div class="card-body text-center">
-                        <h5 style="margin-top: -40px" class="card-title bg-white">Наименование забора</h5>
-                        <center>
-                            <hr class="align-self-center m-0 w-50 border-2" style="border-color: #000000!important;">
-                        </center>
-                        <p class="card-text text-secondary">от 1000 р. / m2</p>
-                        <a href="#" class="btn btn-warning col-9 rounded-0 text-white">Подробнее</a>
-                    </div>
-                </div>
-            </div>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
     <div class="row mt-5">
@@ -136,7 +74,7 @@
                     <div class="col-2">
 
                         <div class="col-8 col-md-12 col-lg-12 col-xl-10 rounded-circle bg-secondary">
-                            <h2 class="text-success">1</h2>
+                            <h2 class="text-green">1</h2>
                         </div>
                     </div>
                     <div class="col-8 text-start pt-3">
@@ -149,7 +87,7 @@
                     <div class="col-2">
 
                         <div class="col-8 col-md-12 col-lg-12 col-xl-10 rounded-circle bg-secondary">
-                            <h2 class="text-success">2</h2>
+                            <h2 class="text-green">2</h2>
                         </div>
                     </div>
                     <div class="col-8 text-start pt-3">
@@ -162,7 +100,7 @@
                     <div class="col-2">
 
                         <div class="col-8 col-md-12 col-lg-12 col-xl-10 rounded-circle bg-secondary">
-                            <h2 class="text-success">3</h2>
+                            <h2 class="text-green">3</h2>
                         </div>
                     </div>
                     <div class="col-8 text-start pt-3">
@@ -173,7 +111,7 @@
         </div>
     </div>
     <div class="row mt-5 pb-3 rounded-5 content-wrapper-green ">
-        <p class="p-4 text-success fs-3 text-center con">Наши работы</p>
+        <p class="p-4 text-green fs-3 text-center con">Наши работы</p>
         <center>
             <div id="carouselExampleControls" class="carousel slide col-sm-12 col-md-8" data-bs-ride="carousel">
                 <div class="carousel-inner">
@@ -217,7 +155,7 @@
                 </div>
                 <div class="col-md-12 col-lg-3">
                     <i class=" bi bi-geo-alt fs-4 text-green"></i>
-                    <span class="ms-1 fs-6 text-black ">Псков и область</span>
+                    <span class="ms-1 fs-6 text-black ">Псковская область</span>
                 </div>
                 <div class="col-md-12 col-lg-3">
                     <i class=" bi bi-geo-alt fs-4 text-green"></i>

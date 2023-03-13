@@ -3,10 +3,13 @@
 namespace App\Controller;
 
 use App\Form\MainPageType;
+use App\Form\ProductEditType;
+use App\Form\ProductType;
 use App\Form\SeoEditType;
 use App\Form\SeoType;
 use App\Repository\MainPageRepository;
 use App\Repository\OrderRepository;
+use App\Repository\ProductRepository;
 use App\Repository\SeoRepository;
 use App\Service\SeoService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -45,6 +48,7 @@ class AdminController extends AbstractController
         $seoCreateForm->handleRequest($request);
         if ($seoCreateForm->isSubmitted() && $seoCreateForm->isValid()) {
             $seoService->create($seoCreateForm->getData());
+            return $this->redirectToRoute($request->get('_route'),$request->query->all());
         }
 
         $seoEditForm = $this->createForm(SeoEditType::class);
@@ -59,6 +63,7 @@ class AdminController extends AbstractController
                     ->setRobots($seoEditForm->get('robots')->getData());
             }
             $seoService->create($seo);
+            return $this->redirectToRoute($request->get('_route'),$request->query->all());
         }
         $seo = $seoRepository->findAll();
         return $this->render('admin/seo.html.twig', [
@@ -113,6 +118,7 @@ class AdminController extends AbstractController
             }
             $entityManager->persist($mainPage);
             $entityManager->flush();
+            return $this->redirectToRoute($request->get('_route'),$request->query->all());
         }
         return $this->render('admin/pages/mainPage.html.twig', [
             'controller_name' => 'Каркасыч (Админ - Страницы - Главная)',
@@ -123,7 +129,7 @@ class AdminController extends AbstractController
     }
 
     #[Route('/admin/pages/mainPage/delete/image/{name}', name: 'app_admin_pages_main_page_delete_image')]
-    public function deleteImage(
+    public function deleteMainPageImage(
         $name,
         MainPageRepository $mainPageRepository,
         EntityManagerInterface $entityManager): Response
@@ -135,7 +141,7 @@ class AdminController extends AbstractController
         }
         if ($name != 'caroulsel_void.jpg') {
             $destination = $this->getParameter('kernel.project_dir') . '/public/uploads/';
-            unlink($destination.$name);
+            unlink($destination . $name);
         }
         $mainPage->setImages($images);
         $entityManager->persist($mainPage);
@@ -171,4 +177,95 @@ class AdminController extends AbstractController
         return $this->redirectToRoute("app_admin_orders");
     }
 
+    #[Route('/admin/products', name: 'app_admin_products')]
+    public function products(Request $request, ProductRepository $productRepository, EntityManagerInterface $entityManager)
+    {
+        $productCreateForm = $this->createForm(ProductType::class);
+        $productCreateForm->handleRequest($request);
+        if ($productCreateForm->isSubmitted() && $productCreateForm->isValid()) {
+            $product = $productCreateForm->getData();
+            $images = $productCreateForm->get('images')->getData();
+            foreach ($images as $image) {
+                $uploadedFile = $image;
+                $destination = $this->getParameter('kernel.project_dir') . '/public/uploads';
+                $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $newFilename = $originalFilename . '-' . uniqid() . '.' . $uploadedFile->guessExtension();
+                $uploadedFile->move(
+                    $destination,
+                    $newFilename
+                );
+                $product->addImage($newFilename);
+            }
+            $entityManager->persist($product);
+            $entityManager->flush();
+            return $this->redirectToRoute($request->get('_route'),$request->query->all());
+        }
+        $productEditForm = $this->createForm(ProductEditType::class);
+        $productEditForm->handleRequest($request);
+        if ($productEditForm->isSubmitted() && $productEditForm->isValid()) {
+            $product = $productRepository->find($productEditForm->get('id')->getData());
+            if ($product) {
+                $product
+                    ->setName($productEditForm->get('name')->getData())
+                    ->setDescription($productEditForm->get('description')->getData())
+                    ->setCost($productEditForm->get('cost')->getData())
+                    ->setInMain($productEditForm->get('inMain')->getData())
+                    ->setIsEnabled($productEditForm->get('isEnabled')->getData());
+            }
+            $images = $productEditForm->get('images')->getData();
+            foreach ($images as $image) {
+                $uploadedFile = $image;
+                $destination = $this->getParameter('kernel.project_dir') . '/public/uploads';
+                $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $newFilename = $originalFilename . '-' . uniqid() . '.' . $uploadedFile->guessExtension();
+                $uploadedFile->move(
+                    $destination,
+                    $newFilename
+                );
+                $product->addImage($newFilename);
+            }
+            $entityManager->persist($product);
+            $entityManager->flush();
+            return $this->redirectToRoute($request->get('_route'),$request->query->all());
+        }
+        $products = $productRepository->findAll();
+        return $this->render('admin/products.html.twig',
+            [
+                'productCreateForm' => $productCreateForm,
+                'productEditForm' => $productEditForm,
+                'products' => $products
+            ]);
+    }
+
+    #[Route('/admin/product/delete/{id}', name: 'app_admin_product_delete')]
+    public function productDelete(ProductRepository $productRepository, $id, EntityManagerInterface $entityManager)
+    {
+        $product = $productRepository->find($id);
+        $entityManager->remove($product);
+        $entityManager->flush();
+        return $this->redirectToRoute('app_admin_products');
+    }
+
+    #[Route('/admin/pages/products/{id}/delete/image/{name}', name: 'app_admin_pages_product_delete_image')]
+    public function deleteProductImage(
+        $id,
+        $name,
+        ProductRepository $productRepository,
+        EntityManagerInterface $entityManager): Response
+    {
+        $product = $productRepository->find($id);
+        $images = $product->getImages();
+        if (($key = array_search($name, $images)) !== false) {
+            unset($images[$key]);
+        }
+        if ($name != 'caroulsel_void.jpg') {
+            $destination = $this->getParameter('kernel.project_dir') . '/public/uploads/';
+            unlink($destination . $name);
+        }
+        $product->setImages($images);
+        $entityManager->persist($product);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_admin_products');
+    }
 }

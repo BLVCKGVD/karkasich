@@ -1,0 +1,125 @@
+{% extends 'baseAdmin.html.twig' %}
+{% form_theme productCreateForm 'bootstrap_5_layout.html.twig' %}
+{% form_theme productEditForm 'bootstrap_5_layout.html.twig' %}
+{% block title %}Какрасыч | Администратор - Товары{% endblock %}
+
+{% block body %}
+    <div class="row d-block d-lg-none">
+        <button class="btn btn-success mb-5 fs-2" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Создать
+        </button>
+    </div>
+    <button class="d-none d-lg-flex btn btn-success float-end mb-5" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Создать
+    </button>
+    <div class="row">
+        <h1 class="text-center">Товары</h1>
+    </div>
+    <div class="offcanvas offcanvas-top " tabindex="-1" id="offcanvasTop" data-bs-backdrop="true"
+         aria-labelledby="offcanvasTopLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasTopLabel">Создать запись</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            {{ form(productCreateForm) }}
+        </div>
+    </div>
+
+    <div class="offcanvas offcanvas-bottom " tabindex="-1" id="offcanvasBottom" data-bs-backdrop="true"
+         aria-labelledby="offcanvasBottomLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasBottomLabel">Изменить запись</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            {{ form(productEditForm) }}
+            <button class="btn btn-danger" onclick="deleteProduct(document.getElementById('product_edit_id').value)">
+                Удалить запись
+            </button>
+        </div>
+    </div>
+
+    <div class="row">
+        {% for p in products %}
+            <div class="col-auto mb-3">
+                <ul class="list-group" onclick='openEditForm(
+                        "{{ p.id }}",
+                        "{{ p.name }}",
+                        "{{ p.description | raw | escape('js')}}",
+                        "{{ p.cost }}",
+                        {{ p.inMain|default(0) }},
+                        {{ p.isEnabled|default(0) }}
+                        )'>
+                    <li class="list-group-item">
+                        <span class="text-secondary">Наименование: </span>{{ p.name }}
+                    </li>
+                    <li class="list-group-item">
+                        <span class="text-secondary">Цена: </span>{{ p.cost }}
+                    </li>
+                    <li class="list-group-item">
+                        <span class="text-secondary">На главной странице: </span>
+                        {% if p.inMain == 1 %}
+                            <span class="text-success">Да</span>
+                        {% else %}
+                            <span class="text-danger">Нет</span>
+                        {% endif %}
+                    </li>
+                    <li class="list-group-item">
+                        <span class="text-secondary">Активно: </span>
+                        {% if p.isEnabled == 1 %}
+                        <span class="text-success">Да</span>
+                            {% else %}
+                                <span class="text-danger">Нет</span>
+                        {% endif %}
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                        {% if p.images is not null and p.images is not empty %}
+                            {% for i in p.images %}
+                                <div class="col-4 ms-3 p-0"
+                                     style="height: 150px; background: url({{ asset('uploads/'~i) }}) no-repeat; background-size: contain;">
+                                    <div onclick="window.location = '{{ path('app_admin_pages_product_delete_image', {id: p.id, name: i }) }}'"
+                                         class="btn btn-danger p-1 rounded-0 float-end fs-6" style="line-height: 9px">x
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        {% endfor %}
+        <div class="row" id="imagesRow"></div>
+    </div>
+
+    <script>
+        function openEditForm(id, name, description, cost, inMain, isEnabled) {
+            event.stopPropagation()
+            var myOffcanvas = document.getElementById('offcanvasBottom')
+            var bsOffcanvas = new bootstrap.Offcanvas(myOffcanvas)
+            bsOffcanvas.show()
+            document.getElementById('product_edit_id').value = id;
+            document.getElementById('product_edit_name').value = name;
+            for(var instanceName in CKEDITOR.instances) {
+                console.log( CKEDITOR.instances[instanceName] );
+            }
+            CKEDITOR.instances.product_edit_description.setData(description)
+            // document.getElementById('product_edit_description').value = description;
+            document.getElementById('product_edit_cost').value = cost;
+            if (inMain === 1) {
+                document.getElementById('product_edit_inMain').checked = true;
+            }
+            if (isEnabled === 1) {
+                document.getElementById('product_edit_isEnabled').checked = true;
+            }
+
+
+        }
+
+        function deleteProduct(id) {
+            window.location = '/admin/product/delete/' + id
+        }
+    </script>
+
+{% endblock %}

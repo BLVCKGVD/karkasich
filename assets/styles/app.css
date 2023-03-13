@@ -2,7 +2,7 @@ html {
     overflow-x: hidden;
 }
 body {
-    background-color: #F5F5F5!important;
+    background-color: #FFFFFF!important;
     font-family: 'Kurale', serif!important;
     overflow-x: clip!important;
 }
@@ -11,7 +11,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .bg-secondary {
-    background-color: #F4FCE7 !important;
+    background-color: #cfdaba !important;
 }
 
 .text-success {
@@ -19,7 +19,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .navbar {
-    background-color: #F4FCE7 !important;
+    background-color: #cfdaba !important;
 }
 .navbar-nav .nav-link.active {
     border-bottom: #284907 2px solid !important;
@@ -32,9 +32,35 @@ h1, h2, h3, h4, h5, h6 {
     padding-bottom: 0.25em!important;
     padding-top: 0.25em!important;
 }
+.fence_svg {
+    filter: invert(95%) sepia(17%) saturate(342%) hue-rotate(22deg) brightness(89%) contrast(91%)!important;
+}
+
+@media (max-width: 1440px) {
+    .fence-bg {
+        background: unset!important;
+    }
+}
 
 .content-wrapper-green {
-    background-color: #F4FCE7!important;
+    background-color: #cfdaba!important;
+}
+
+.content-wrapper-dark-green {
+    background-color: rgb(40 73 7)!important
+}
+
+.content-wrapper-dark-green:hover {
+    transition: 0.5s;
+    background-color: rgb(55, 100, 10) !important
+}
+
+.bg-dark-green {
+    background-color: rgb(40 73 7)!important
+
+}
+.bg-dark-green:hover {
+    background-color: rgb(55, 100, 10) !important
 }
 
 /* ---------------------------------------------------
@@ -52,8 +78,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .bg-green {
-    background-color: #284907!important;
+    background-color: #0d1803 !important;
 }
 .text-green {
-    color: #284907!important;
+    color: #0d1803!important;
 }

@@ -7,6 +7,7 @@
             </div>
             {{ form_start(orderForm) }}
             <div class="modal-body">
+                {{ form_row(orderForm.firstName) }}
                 {{ form_row(orderForm.phone) }}
                 {{ form_row(orderForm.email) }}
                 {{ form_row(orderForm.text) }}

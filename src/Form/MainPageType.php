@@ -10,6 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\All;
+use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class MainPageType extends AbstractType
@@ -48,6 +50,11 @@ class MainPageType extends AbstractType
                     'multiple' => 'multiple',
                     'required' => false,
                     'mapped' => false,
+                    'constraints' => [new All(new Image([
+                        'maxRatio' => 16/9,
+                        'minRatio' => 16/9,
+                        'maxRatioMessage' => 'Соотношение сторон должно быть 16:9',
+                        'minRatioMessage' => 'Соотношение сторон должно быть 16:9']))],
                     'label' => $this->translator->trans('general.images'),
                 ])
             ->add('save', SubmitType::class, [

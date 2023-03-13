@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ seo.title|default('Какрасыч | Главная') }}{% endblock %}
+
+{% block body %}
+    <style>
+        #oval {
+            margin-left: -25%;
+            width: 150%;
+
+            background: red;
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+        }
+    </style>
+    <button class="position-fixed btn bg-dark-green bg-gradient text-white" style="top: 5.30em; right: 1em;">Каталог товаров</button>
+    <div class="row ms-auto me-auto mt-5 rounded-5 content-wrapper-green shadow-lg pt-4 pb-4">
+        <h1 class="text-center mb-5">{{ product.name }}</h1>
+        <div class="col-sm-12 col-lg-4 text-center mb-5">
+                <img class="img-fluid rounded-5 shadow-lg" src="{{ asset('uploads/'~product.images|first|default('caroulsel_void.jpg')) }}" alt="{{ product.images|first|default('Заглушка') }}">
+                <p class="mt-3 fs-5 text-green">от {{ product.cost }} руб п.м.</p>
+                <button class="col-6 btn bg-dark-green bg-gradient text-white  mb-3" onclick="launchModal('Переход из кнопки заказать в товаре | {{ product.name }} | (ссылка: {{ path("app_product",{id:product.id}) }})')">Заказать</button>
+                <button class="col-6 btn bg-dark-green bg-gradient text-white " onclick="launchModalCaroulsel()">Фотографии</button>
+        </div>
+        <div class="col-sm-12 col-lg-6 pe-5  ">
+            {{ product.description|raw }}
+        </div>
+        <div class="col-lg-2 d-sm-none d-lg-flex">
+            <ul class="list-group col-10 ">
+                <li class="list-group-item list-group-item-action content-wrapper-dark-green border-0 bg-gradient shadow-lg">
+                    <a class="text-decoration-none fs-6 text-white" href="#">Забор dasdasdasdas1</a>
+                </li>
+                <li class="list-group-item list-group-item-action content-wrapper-dark-green border-0 bg-gradient shadow-lg">
+                    <a class="text-decoration-none fs-6 text-white" href="#">Забор 2</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="row text-center mb-5">
+            <h3 class="mb-5">География наших работ</h3>
+            <div class="row">
+
+                <div class="col-md-12 col-lg-3">
+                    <i class=" bi bi-geo-alt fs-4 text-green"></i>
+                    <span class="ms-1 fs-6 text-black ">Санкт-Петербург</span>
+                </div>
+                <div class="col-md-12 col-lg-3">
+                    <i class="bi bi-geo-alt fs-4 text-green"></i>
+                    <span class="ms-1 fs-6 text-black ">Ленинградская область</span>
+                </div>
+                <div class="col-md-12 col-lg-3">
+                    <i class=" bi bi-geo-alt fs-4 text-green"></i>
+                    <span class="ms-1 fs-6 text-black ">Псков и область</span>
+                </div>
+                <div class="col-md-12 col-lg-3">
+                    <i class=" bi bi-geo-alt fs-4 text-green"></i>
+                    <span class="ms-1 fs-6 text-black align-self-center">Карелия</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+    {% include './particles/modal.html.twig' %}
+    {% include './particles/modal_caroulsel.html.twig' %}
+{% endblock %}
